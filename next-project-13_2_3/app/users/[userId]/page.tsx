@@ -3,13 +3,26 @@ import getUser from '@/app/lib/getUser';
 import getUserPosts from '@/app/lib/getUserPosts';
 import { Suspense } from 'react'; //built in React component that allows you to wrap components you want to suspend rendering until eg some condition is met. Recommended to use with fetching from server components. Instead of using Promise.all pattern, use Suspense component
 import UserPosts from '@/app/users/[userId]/components/UserPosts';
+import type { Metadata } from 'next';
 
+//string since it is coming from URL params
 type Params = {
 	params: {
 		userId: string;
 	};
 };
-//string since it is coming from URL params
+//generate dynamic metadata - We need the user data [recommendation when using Next is to make req for data where you need it - even though repeating request Next deduplicates reqs (check notes)]
+export async function generateMetadata({
+	params: { userId },
+}: Params): Promise<Metadata> {
+	const userData: Promise<User> = getUser(userId);
+	const user: User = await userData;
+
+	return {
+		title: user.name,
+		description: `This is the page of ${user.name}`,
+	};
+}
 
 export default async function UserPage({ params: { userId } }: Params) {
 	//fetches data in parallel with the users list API using server component (no await)
