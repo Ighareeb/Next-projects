@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'; //add static metadata
-import getAllUsers from '../lib/getAllUsers';
+import getAllUsers from '@/app/lib/getAllUsers';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
