@@ -44,4 +44,11 @@ Fetching data fundamentals
 https://nextjs.org/docs/app/building-your-application/data-fetching
 - RECOMMENDATIONS: 1. fetch data on server using Server components; 2. parallel data fetching; 3. (for layout/pages) fetch data where it is used [may see same fetch req more than once] --> Next will auto deduplicate requests in a tree and only make the req once; 4. use LoadingUI, Streaming, Suspense to progressively render page while content loads
 
-
+Fetching with server components:
+- differences you can control like static site generation, server side rendering, incremental static regeneration strategy etc.
+-( static with props vs SSG static that use data/props)
+- In dev mode you can't really tell if components are static server components or SSR components or apply any other data fetching strategies?
+- If you run build (npm run build) instead of dev Next will tell you what type of components are being generated PROVIDES LOTS OF INFO ABOUT ROUTES(pages, app), LAYOUTS AND COMPONENTS + size and response time --> npm run start will use build that is created to get better idea of how app will respond
+--> notice on network tab how instantly made reqs/pre-fetched and pre-rendered data for users in SSR pages even before mousing over compared to dev mode
+*- we can use a strategy with our Next.js code for server side rendering since it won't know what req we are going to make (unlike static pages where it is auto pre-rendered)
+https://nextjs.org/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating
