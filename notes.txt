@@ -40,6 +40,8 @@ https://nextjs.org/docs/app/building-your-application/optimizing/metadata
 -(however in project am going over example using head.js file)
 --> Static vs Dynamic metadata
 
-
+Fetching data fundamentals
+https://nextjs.org/docs/app/building-your-application/data-fetching
+- RECOMMENDATIONS: 1. fetch data on server using Server components; 2. async/parallel fetching; 3. (for layout/pages) fetch data where it is used [may see same fetch req more than once] --> Next will auto deduplicate requests in a tree and only make the req once; 4. use LoadingUI, Streaming, Suspense to progressively render page while content loads
 
 
