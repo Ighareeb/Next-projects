@@ -1,0 +1,45 @@
+Next.js
+-SSR React app
+-ServerSideRenderingcan improve performance and UX by pre-rendering and sending fully formed HTML to client browser 
+-->(consider React would be rendering on the client side after server sends code bundle. Next pre-renders.)
+-->Forms of pre-rendering:
+1. SSG [StaticSiteGeneration]/Static Generation (recommended) - HTML generated at build time and reused at each req. 
+---Efficient, built on server, can be cached by CDN(ContentDeliveryNetwork).
+2. SSR - HTML generated on each req
+NOTE: Both are generated on the server. They can be combined with client-side fetching to create hybrid apps that use advantages of both forms.
+
+-Automatically splits code into smaller chunks = easier and less time to load
+-SEO optimization - linked to SSR; allows search engines to easily crawl and index pages
+-Built in features speed up development eg. file-based routing (vs React Router), auto code splitting, built-in API routes, TS support
+-Dev experience - eg. hot reloading, easy integration 
+-Scalability - able to handle large-scale apps with features mentioned already as well as eg. caching, support for serverless functions.
+
+pages/api folder for req BE 
+app folder with pages FE
+
+
+Layout + Routing
+-simple routing - create dir for page you want to link/route to eg. app/about/page.tsx automatically creates route
+-about/layout.tsx applies to all pages in app
+-setup layout for specific tree eg
+
+export default function AboutLayout({
+	children,
+}: {
+	children: React.ReactNode;
+}) {
+	return <>{children}</>;
+}
+
+-when creating styles you can have global styles as well as specific styles using style modules eg. styles.module.css for each page/path in layout
+(you can use the same name for identifiers with different styles in different style pages since they are based on context in which they are being used eg. .main{})
+
+NOTE about 13.2.3 upgrade - fewer folders in app : no pages dir; everything is now in app dir - IMP changes to metadata 
+https://nextjs.org/docs/app/building-your-application/optimizing/metadata
+-note: meta and link ltags would be defined in <head> HTML in layout/page but head is .js file is deprecated after 13.2
+-(however in project am going over example using head.js file)
+--> Static vs Dynamic metadata
+
+
+
+
