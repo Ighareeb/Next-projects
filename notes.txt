@@ -52,3 +52,6 @@ Fetching with server components:
 --> notice on network tab how instantly made reqs/pre-fetched and pre-rendered data for users in SSR pages even before mousing over compared to dev mode
 *- we can use a strategy with our Next.js code for server side rendering since it won't know what req we are going to make (unlike static pages where it is auto pre-rendered)
 https://nextjs.org/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating
+
+If you are creating dynamic data without providing static props => SSR component generated at req time from the server
+Nextjs recommends SSG, so if you know params in advance you can provide them by generating static params with function [userId]/pages.tsx(generateStaticParams)so you can have SSG pages

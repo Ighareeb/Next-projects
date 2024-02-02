@@ -5,6 +5,7 @@ import { Suspense } from 'react'; //built in React component that allows you to 
 import UserPosts from '@/app/users/[userId]/components/UserPosts';
 import type { Metadata } from 'next';
 import getAllUsers from '@/app/lib/getAllUsers';
+import { notFound } from 'next/navigation';
 
 //string since it is coming from URL params
 type Params = {
@@ -19,6 +20,12 @@ export async function generateMetadata({
 	const userData: Promise<User> = getUser(userId);
 	const user: User = await userData;
 
+	//handle errors for dynamic pages - instead of just generating default 404 error page if resource not found
+	if (!user) {
+		return {
+			title: 'User not found',
+		};
+	}
 	return {
 		title: user.name,
 		description: `This is the page of ${user.name}`,
@@ -32,6 +39,11 @@ export default async function UserPage({ params: { userId } }: Params) {
 
 	// const [user, userPosts] = await Promise.all([userData, userPostsData]);
 	const user = await userData;
+
+	//handle errors for dynamic pages - instead of just generating default 404 error page if resource not found
+	if (!user) {
+		return notFound(); //uses metadata error handling instead of default
+	}
 
 	return (
 		<>
