@@ -64,7 +64,8 @@ https://nextjs.org/docs/app/building-your-application/routing
 https://nextjs.org/docs/app/building-your-application/routing/route-handlers
 -API Routes replaced with Route Handlers in 13.2
 -Route Handlers are only available inside the app dir and are equivalent of API routes inside pages_dir so you do not need to use both (you cannot have a route.ts in the same dir as a page.tsx)
--
+-Route Handlers are evaluated dynamically when:
+--> 1.using Req obj with GET; 2. using any other HTTP method; 3.  using dynamic functions (eg. cookies and headers)
 
 
 
