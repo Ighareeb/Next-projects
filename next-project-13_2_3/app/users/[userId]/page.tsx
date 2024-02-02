@@ -4,6 +4,7 @@ import getUserPosts from '@/app/lib/getUserPosts';
 import { Suspense } from 'react'; //built in React component that allows you to wrap components you want to suspend rendering until eg some condition is met. Recommended to use with fetching from server components. Instead of using Promise.all pattern, use Suspense component
 import UserPosts from '@/app/users/[userId]/components/UserPosts';
 import type { Metadata } from 'next';
+import getAllUsers from '@/app/lib/getAllUsers';
 
 //string since it is coming from URL params
 type Params = {
@@ -43,4 +44,16 @@ export default async function UserPage({ params: { userId } }: Params) {
 			</Suspense>
 		</>
 	);
+}
+
+//changing SSR pages to SSG pages using incremental static regen by passing userId param in advance so it can statically generate the pages
+//still follow incrememental static regeneration strategy (passes static params to UserPage function that uses strategy in getUserPosts)
+//npm run build shows that components are now SSG
+export async function generateStaticParams() {
+	const userData: Promise<User[]> = getAllUsers();
+	const users = await userData;
+	//providing static params ahead of time for Nextjs to use
+	return users.map((user) => {
+		return { userId: user.id.toString() };
+	});
 }
