@@ -34,6 +34,7 @@ export default function AboutLayout({
 -when creating styles you can have global styles as well as specific styles using style modules eg. styles.module.css for each page/path in layout
 (you can use the same name for identifiers with different styles in different style pages since they are based on context in which they are being used eg. .main{})
 
+NEW PROJECT Nextjs@13.2.3
 NOTE about 13.2.3 upgrade - fewer folders in app : no pages dir; everything is now in app dir - IMP changes to metadata 
 https://nextjs.org/docs/app/building-your-application/optimizing/metadata
 -note: meta and link ltags would be defined in <head> HTML in layout/page but head is .js file is deprecated after 13.2
@@ -55,3 +56,37 @@ https://nextjs.org/docs/app/building-your-application/data-fetching/fetching-cac
 
 If you are creating dynamic data without providing static props => SSR component generated at req time from the server
 Nextjs recommends SSG, so if you know params in advance you can provide them by generating static params with function [userId]/pages.tsx(generateStaticParams)so you can have SSG pages
+
+Using Tailwindcss - https://tailwindcss.com/docs/guides/nextjs (skipped this project since I have not done tailwind)
+
+NEW PROJECT Nextjs@13.2.4 with src_dir
+https://nextjs.org/docs/app/building-your-application/routing
+https://nextjs.org/docs/app/building-your-application/routing/route-handlers
+-API Routes replaced with Route Handlers in 13.2
+-Route Handlers are only available inside the app dir and are equivalent of API routes inside pages_dir so you do not need to use both (you cannot have a route.ts in the same dir as a page.tsx)
+-
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
