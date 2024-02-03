@@ -67,8 +67,23 @@ https://nextjs.org/docs/app/building-your-application/routing/route-handlers
 -Route Handlers are evaluated dynamically when:
 --> 1.using Req obj with GET; 2. using any other HTTP method; 3.  using dynamic functions (eg. cookies and headers)
 
+NEW PROJECT Nextjs@13.2.4 with src_dir 
+NOTE: API Routes have been replaced by Route Handlers in 13.2
+REST APIs in Next.js - Use Cases:
+https://nextjs.org/docs/pages/building-your-application/routing/api-routes
+- Can build entire API with API Routes 
+- If you have existing API no need to forward calls to the API through an API route 
+- Can be used to mask the URL of external services, hide secret API keys, secret resource URLs
+- Can be used to process form data with API route
+- To use environment variables on the server to securely access external services - built-in support for loading .env variables from .env.local into process.env
+- Dont't need to use API route if fetching from a server component; if you are using secret API key or secret URL it will already be hidden on the server (non-viewable on client-side code)
+- If not using secret API key or secret URL you can fetch directly from client components without using API routes
 
+- For this project not using (getStaticProps) instead using generateStaticParams where the data must be available at build time so the page can render ahead of time for the user's requests...
+-->...Dont't use API routes for server components --> This is important to consider as if you are building an app that depends on API data it will not be available and you will get a build error as they cannot be built at the same time.
+[server components need data at build time, to generate static params for SSG, which cannot be accessed before/while the API route is being built]
 
+NOTE ON API KEYS in .env.local --> ususally a specified value issued by 3rd party data source when you set up an account.
 
 
 
