@@ -85,8 +85,23 @@ https://nextjs.org/docs/pages/building-your-application/routing/api-routes
 
 NOTE ON API KEYS in .env.local --> ususally a specified value issued by 3rd party data source when you set up an account.
 
+MIDDLEWARE - 
+- Can modify rq headers, res headers and send responses
+*Next EdgeRuntime is based on standard web APIs, which is used by middleware and edge API routes
+1. create middleware.ts/js file at same level as your 'pages' (in <root> or if using <src (not app)> dir ) --> 2. export middleware function
+- IMP: middleware file applies to EVERY request on the web app (not just API requests) - it will be invoked for every route, and every resource needed in the app --> consider limiting where middleware is applied (eg. just APIs): 2 ways to do this:
+way1 = MATCHING PATHS - define variable config that is object with {matcher: '<path>'}
+-- can be a static route match without any query params
+-- matcher can be an array to match multiple paths eg. matcher: ['dashboard/path', 'api/path']
+-- matcher able to use regex
+* configured matchers : must start with / 
+way2 = USING CONDITIONALS 
 
-
+Using middleware npm modules/packages (dependencies)
+eg. limiter - provides generic rate limiter for the web and node.js. Useful for API clients, web crawling or other task that need to be throttled
+https://www.npmjs.com/package/limiter
+--> we can't use it in our middleware file because it has a dependency on Nodejs that won't work in EdgeRuntime so need to be applied inside the routes instead
+- you can create multiple instances of limiter in different files to apply different rules to the routes (eg. if you didn't want routes to share # of limiter tokens)
 
 
 
